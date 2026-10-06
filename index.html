@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SecureGate | OTP Authentication</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+</head>
+
+<body>
+
+<!-- =====================================================
+     LOGIN / SIGNUP PAGE
+===================================================== -->
+
+<section
+    id="authPage"
+    class="page active"
+>
+
+    <div class="auth-layout">
+
+        <!-- LEFT SIDE -->
+
+        <div class="auth-side">
+
+            <div class="auth-side-content">
+
+                <span class="tag">
+                    <i class="fa-solid fa-lock"></i>
+                    Secure Authentication
+                </span>
+
+                <h1>
+                    Simple.
+                    <span>Secure.</span>
+                    Verified.
+                </h1>
+
+                <p>
+                    SecureGate protects your account using
+                    strong passwords and administrator-controlled
+                    OTP verification.
+                </p>
+
+                <div class="security-list">
+
+                    <div>
+                        <i class="fa-solid fa-circle-check"></i>
+                        Strong password validation
+                    </div>
+
+                    <div>
+                        <i class="fa-solid fa-circle-check"></i>
+                        4-digit OTP verification
+                    </div>
+
+                    <div>
+                        <i class="fa-solid fa-circle-check"></i>
+                        Administrator-controlled authentication
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="auth-form-container">
+
+            <div class="auth-box">
+
+                <!-- LOGIN -->
+
+                <form
+                    id="loginForm"
+                    class="form-section active"
+                >
+
+                    <div class="auth-header">
+
+                        <span class="small-label">
+                            WELCOME BACK
+                        </span>
+
+                        <h2>
+                            Login to SecureGate
+                        </h2>
+
+                        <p>
+                            Enter your account details to continue.
+                        </p>
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="loginEmail">
+                            Email Address
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-regular fa-envelope"></i>
+
+                            <input
+                                type="email"
+                                id="loginEmail"
+                                placeholder="Enter your email address"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="loginPassword">
+                            Password
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                            <input
+                                type="password"
+                                id="loginPassword"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                onclick="togglePassword('loginPassword', this)"
+                            >
+                                <i class="fa-regular fa-eye"></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="primary-button full-width"
+                    >
+                        Login
+
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+
+                    <p
+                        id="loginMessage"
+                        class="form-message"
+                    ></p>
+
+
+                    <div class="auth-switch">
+
+                        <span>
+                            Don't have an account yet?
+                        </span>
+
+                        <button
+                            type="button"
+                            onclick="openTab('signup')"
+                        >
+                            Sign up here
+                        </button>
+
+                    </div>
+
+                </form>
+
+
+                <!-- SIGN UP -->
+
+                <form
+                    id="signupForm"
+                    class="form-section"
+                >
+
+                    <div class="auth-header">
+
+                        <span class="small-label">
+                            CREATE ACCOUNT
+                        </span>
+
+                        <h2>
+                            Create your account
+                        </h2>
+
+                        <p>
+                            Enter your information to get started.
+                        </p>
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="signupName">
+                            Full Name
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-regular fa-user"></i>
+
+                            <input
+                                type="text"
+                                id="signupName"
+                                placeholder="Enter your full name"
+                                autocomplete="name"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="signupEmail">
+                            Email Address
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-regular fa-envelope"></i>
+
+                            <input
+                                type="email"
+                                id="signupEmail"
+                                placeholder="Enter your email address"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="signupPassword">
+                            Password
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                            <input
+                                type="password"
+                                id="signupPassword"
+                                placeholder="Create a strong password"
+                                autocomplete="new-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                onclick="togglePassword('signupPassword', this)"
+                            >
+                                <i class="fa-regular fa-eye"></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD RULES -->
+
+                    <div class="password-requirements">
+
+                        <p class="requirement-title">
+                            Your password must contain:
+                        </p>
+
+                        <div
+                            id="ruleLength"
+                            class="password-rule"
+                        >
+                            <i class="fa-regular fa-circle"></i>
+                            At least 8 characters
+                        </div>
+
+                        <div
+                            id="ruleUpper"
+                            class="password-rule"
+                        >
+                            <i class="fa-regular fa-circle"></i>
+                            One uppercase letter
+                        </div>
+
+                        <div
+                            id="ruleLower"
+                            class="password-rule"
+                        >
+                            <i class="fa-regular fa-circle"></i>
+                            One lowercase letter
+                        </div>
+
+                        <div
+                            id="ruleNumber"
+                            class="password-rule"
+                        >
+                            <i class="fa-regular fa-circle"></i>
+                            One number
+                        </div>
+
+                        <div
+                            id="ruleSpecial"
+                            class="password-rule"
+                        >
+                            <i class="fa-regular fa-circle"></i>
+                            One special character
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="primary-button full-width"
+                    >
+                        Create Account
+
+                        <i class="fa-solid fa-user-plus"></i>
+                    </button>
+
+
+                    <p
+                        id="signupMessage"
+                        class="form-message"
+                    ></p>
+
+
+                    <div class="auth-switch">
+
+                        <span>
+                            Already have an account?
+                        </span>
+
+                        <button
+                            type="button"
+                            onclick="openTab('login')"
+                        >
+                            Login here
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     WAITING FOR ADMIN / OTP ENTRY
+===================================================== -->
+
+<section
+    id="waitingPage"
+    class="page"
+>
+
+    <div class="center-page">
+
+        <div class="waiting-card">
+
+            <!-- BACK TO LOGIN -->
+
+            <button
+                type="button"
+                class="waiting-back-top"
+                onclick="goBackToLogin()"
+            >
+                <i class="fa-solid fa-arrow-left"></i>
+
+                <span>
+                    Back to Login
+                </span>
+            </button>
+
+
+            <!-- ICON -->
+
+            <div class="waiting-animation">
+
+                <div class="waiting-icon">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+
+                <span class="pulse pulse-one"></span>
+                <span class="pulse pulse-two"></span>
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <span class="status-badge pending">
+
+                <i class="fa-solid fa-clock"></i>
+
+                Waiting for Administrator
+
+            </span>
+
+
+            <h2>
+                OTP Request Sent
+            </h2>
+
+
+            <p id="waitingMessage">
+                Your request has been sent to the administrator.
+            </p>
+
+
+            <!-- OTP FORM -->
+
+            <form id="waitingOtpForm">
+
+                <div class="waiting-otp-section">
+
+                    <label for="waitingOtpInput">
+                        Enter 4-Digit OTP
+                    </label>
+
+                    <input
+                        type="text"
+                        id="waitingOtpInput"
+                        class="single-otp-input"
+                        placeholder="0000"
+                        maxlength="4"
+                        inputmode="numeric"
+                        autocomplete="one-time-code"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="primary-button full-width waiting-verify-button"
+                >
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    Verify OTP
+                </button>
+
+
+                <p
+                    id="waitingOtpMessage"
+                    class="form-message"
+                ></p>
+
+            </form>
+
+
+            <p class="waiting-note">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+                Ask the administrator for your 4-digit OTP,
+                then enter it above.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     OLD OTP VERIFICATION PAGE
+     Kept for compatibility
+===================================================== -->
+
+<section
+    id="otpVerificationPage"
+    class="page"
+>
+
+    <div class="center-page">
+
+        <div class="otp-card">
+
+            <div class="otp-logo">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+
+            <span class="small-label">
+                SECURITY VERIFICATION
+            </span>
+
+
+            <h2>
+                Enter Your OTP
+            </h2>
+
+
+            <p>
+                Enter the 4-digit OTP generated
+                by the administrator.
+            </p>
+
+
+            <div class="otp-user-info">
+
+                <span>
+                    Verifying account
+                </span>
+
+                <strong id="otpUserEmail">
+                    user@email.com
+                </strong>
+
+            </div>
+
+
+            <form id="otpForm">
+
+                <div class="input-group">
+
+                    <label for="otpInput">
+                        4-Digit OTP Code
+                    </label>
+
+                    <input
+                        type="text"
+                        id="otpInput"
+                        class="single-otp-input"
+                        placeholder="0000"
+                        maxlength="4"
+                        inputmode="numeric"
+                        autocomplete="one-time-code"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="primary-button full-width"
+                >
+                    <i class="fa-solid fa-check"></i>
+
+                    Verify OTP
+                </button>
+
+
+                <p
+                    id="otpMessage"
+                    class="form-message"
+                ></p>
+
+            </form>
+
+
+            <button
+                type="button"
+                class="plain-link"
+                onclick="showPage('waitingPage')"
+            >
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Return to OTP Request
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     USER HOMEPAGE
+===================================================== -->
+
+<section
+    id="userDashboardPage"
+    class="page"
+>
+
+    <div class="simple-dashboard">
+
+        <!-- SIDEBAR -->
+
+        <aside class="simple-sidebar">
+
+            <div class="simple-sidebar-brand">
+
+                <div class="simple-logo">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+
+                <div>
+
+                    <h2>
+                        SecureGate
+                    </h2>
+
+                    <span>
+                        User Portal
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <nav class="simple-nav">
+
+                <button
+                    type="button"
+                    class="simple-nav-link active"
+                    onclick="setUserMenuActive(this)"
+                >
+                    <i class="fa-solid fa-house"></i>
+
+                    <span>
+                        Home
+                    </span>
+                </button>
+
+
+                <button
+                    type="button"
+                    class="simple-nav-link"
+                    onclick="setUserMenuActive(this); showToast('Profile section coming soon.')"
+                >
+                    <i class="fa-regular fa-user"></i>
+
+                    <span>
+                        Profile
+                    </span>
+                </button>
+
+
+                <button
+                    type="button"
+                    class="simple-nav-link"
+                    onclick="setUserMenuActive(this); showToast('Security section coming soon.')"
+                >
+                    <i class="fa-solid fa-lock"></i>
+
+                    <span>
+                        Security
+                    </span>
+                </button>
+
+
+                <button
+                    type="button"
+                    class="simple-nav-link"
+                    onclick="setUserMenuActive(this); showToast('Activity section coming soon.')"
+                >
+                    <i class="fa-regular fa-clock"></i>
+
+                    <span>
+                        Activity
+                    </span>
+                </button>
+
+
+                <button
+                    type="button"
+                    class="simple-nav-link"
+                    onclick="setUserMenuActive(this); showToast('Settings section coming soon.')"
+                >
+                    <i class="fa-solid fa-gear"></i>
+
+                    <span>
+                        Settings
+                    </span>
+                </button>
+
+            </nav>
+
+
+            <div class="simple-sidebar-bottom">
+
+                <button
+                    type="button"
+                    class="simple-logout"
+                    onclick="userLogout()"
+                >
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+
+                    <span>
+                        Logout
+                    </span>
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- USER MAIN -->
+
+        <main class="simple-home">
+
+            <div class="simple-home-profile">
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+
+            <!-- HERO -->
+
+            <section class="simple-hero">
+
+                <div class="simple-hero-text">
+
+                    <span class="welcome-label">
+                        WELCOME BACK,
+                    </span>
+
+                    <h1>
+
+                        <span id="simpleDashboardName">
+                            User
+                        </span>!
+
+                        <span class="wave-emoji">
+                            👋
+                        </span>
+
+                    </h1>
+
+                    <p>
+                        You're securely signed in to your
+                        SecureGate account.
+                    </p>
+
+                </div>
+
+
+                <!-- ILLUSTRATION -->
+
+                <div class="simple-security-art">
+
+                    <div class="plant">
+
+                        <span class="leaf leaf-one"></span>
+                        <span class="leaf leaf-two"></span>
+                        <span class="leaf leaf-three"></span>
+
+                        <span class="plant-stem stem-one"></span>
+                        <span class="plant-stem stem-two"></span>
+                        <span class="plant-stem stem-three"></span>
+
+                        <span class="plant-pot"></span>
+
+                    </div>
+
+
+                    <div class="laptop">
+
+                        <div class="laptop-screen">
+
+                            <div class="shield-art">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+
+                        </div>
+
+                        <div class="laptop-base"></div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <div class="home-divider">
+                <span></span>
+            </div>
+
+
+            <!-- QUICK ACTIONS -->
+
+            <section class="quick-actions-section">
+
+                <span class="quick-label">
+                    WHAT WOULD YOU LIKE TO DO TODAY?
+                </span>
+
+
+                <div class="quick-actions">
+
+                    <button
+                        type="button"
+                        class="quick-action"
+                        onclick="showToast('Profile section coming soon.')"
+                    >
+
+                        <div class="quick-icon quick-blue">
+                            <i class="fa-regular fa-user"></i>
+                        </div>
+
+                        <strong>
+                            View Profile
+                        </strong>
+
+                        <span>
+                            See your account information.
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="quick-action"
+                        onclick="showToast('Password settings coming soon.')"
+                    >
+
+                        <div class="quick-icon quick-pink">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+
+                        <strong>
+                            Change Password
+                        </strong>
+
+                        <span>
+                            Update your account password.
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="quick-action"
+                        onclick="showToast('Activity history coming soon.')"
+                    >
+
+                        <div class="quick-icon quick-green">
+                            <i class="fa-regular fa-clock"></i>
+                        </div>
+
+                        <strong>
+                            Check Activity
+                        </strong>
+
+                        <span>
+                            View your recent login activity.
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="quick-action"
+                        onclick="showToast('OTP history coming soon.')"
+                    >
+
+                        <div class="quick-icon quick-purple">
+                            <i class="fa-solid fa-key"></i>
+                        </div>
+
+                        <strong>
+                            OTP History
+                        </strong>
+
+                        <span>
+                            See your OTP verification records.
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- DECORATION -->
+
+            <div class="home-wave">
+
+                <div class="wave-one"></div>
+
+                <div class="wave-two"></div>
+
+                <span class="bubble bubble-one"></span>
+                <span class="bubble bubble-two"></span>
+                <span class="bubble bubble-three"></span>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ADMIN DASHBOARD
+===================================================== -->
+
+<section
+    id="adminDashboardPage"
+    class="page"
+>
+
+    <div class="simple-dashboard admin-simple-dashboard">
+
+        <!-- =================================================
+             ADMIN SIDEBAR
+        ================================================== -->
+
+        <aside class="simple-sidebar">
+
+            <div class="simple-sidebar-brand">
+
+                <div class="simple-logo">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+
+                <div>
+
+                    <h2>
+                        SecureGate
+                    </h2>
+
+                    <span>
+                        Admin Portal
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <nav class="simple-nav">
+
+                <button
+                    type="button"
+                    class="simple-nav-link active"
+                >
+                    <i class="fa-solid fa-house"></i>
+
+                    <span>
+                        Home
+                    </span>
+                </button>
+
+
+                <button
+                    type="button"
+                    class="simple-nav-link"
+                >
+                    <i class="fa-solid fa-key"></i>
+
+                    <span>
+                        OTP Requests
+                    </span>
+
+                    <span
+                        id="sidebarRequestCount"
+                        class="admin-menu-count"
+                    >
+                        0
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="simple-nav-link"
+                >
+                    <i class="fa-solid fa-users"></i>
+
+                    <span>
+                        Users
+                    </span>
+                </button>
+
+
+                <button
+                    type="button"
+                    class="simple-nav-link"
+                >
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <span>
+                        Security
+                    </span>
+                </button>
+
+            </nav>
+
+
+            <div class="simple-sidebar-bottom">
+
+                <button
+                    type="button"
+                    class="simple-logout"
+                    onclick="adminLogout()"
+                >
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+
+                    <span>
+                        Logout
+                    </span>
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =================================================
+             ADMIN MAIN
+        ================================================== -->
+
+        <main class="simple-home admin-home">
+
+            <!-- PROFILE -->
+
+            <div class="admin-top-profile">
+
+                <div class="admin-top-profile-text">
+
+                    <strong>
+                        Administrator
+                    </strong>
+
+                    <span>
+                        System Admin
+                    </span>
+
+                </div>
+
+
+                <div class="simple-home-profile">
+
+                    <i class="fa-solid fa-user-shield"></i>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 HERO
+            ================================================== -->
+
+            <section class="admin-welcome-section">
+
+                <div>
+
+                    <span class="welcome-label">
+                        ADMIN DASHBOARD
+                    </span>
+
+
+                    <h1>
+                        Good day, Administrator 👋
+                    </h1>
+
+
+                    <p>
+                        Manage user authentication requests,
+                        generate OTP codes, and monitor registered
+                        SecureGate users.
+                    </p>
+
+                </div>
+
+
+                <div class="admin-hero-art">
+
+                    <div class="admin-hero-circle">
+
+                        <i class="fa-solid fa-user-shield"></i>
+
+                    </div>
+
+                    <span class="admin-dot admin-dot-one"></span>
+                    <span class="admin-dot admin-dot-two"></span>
+                    <span class="admin-dot admin-dot-three"></span>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 OTP REQUESTS
+            ================================================== -->
+
+            <section class="admin-content-section">
+
+                <div class="admin-content-header">
+
+                    <div>
+
+                        <span class="quick-label">
+                            AUTHENTICATION
+                        </span>
+
+                        <h2>
+                            OTP Requests
+                        </h2>
+
+                        <p>
+                            Review authentication requests and
+                            generate verification codes for users.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="admin-refresh-button"
+                        onclick="renderAdminDashboard()"
+                    >
+
+                        <i class="fa-solid fa-rotate-right"></i>
+
+                        Refresh
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="otpRequestsContainer"
+                    class="admin-otp-container"
+                >
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 REGISTERED USERS
+            ================================================== -->
+
+            <section class="admin-content-section users-section">
+
+                <div class="admin-content-header">
+
+                    <div>
+
+                        <span class="quick-label">
+                            USER MANAGEMENT
+                        </span>
+
+                        <h2>
+                            Registered Users
+                        </h2>
+
+                        <p>
+                            View the accounts registered in
+                            SecureGate.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="admin-users-table-wrapper">
+
+                    <table class="admin-users-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    User
+                                </th>
+
+                                <th>
+                                    Email
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Account Created
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="usersTableBody">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 BOTTOM DECORATION
+            ================================================== -->
+
+            <div class="home-wave">
+
+                <div class="wave-one"></div>
+
+                <div class="wave-two"></div>
+
+                <span class="bubble bubble-one"></span>
+                <span class="bubble bubble-two"></span>
+                <span class="bubble bubble-three"></span>
+
+            </div>
+
+
+        </main>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     OTP MODAL
+===================================================== -->
+
+<div
+    id="otpModal"
+    class="modal-overlay"
+>
+
+    <div class="modal">
+
+        <button
+            type="button"
+            class="modal-close"
+            onclick="closeOtpModal()"
+        >
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+
+        <div class="modal-icon">
+            <i class="fa-solid fa-key"></i>
+        </div>
+
+
+        <span class="small-label">
+            OTP GENERATED
+        </span>
+
+
+        <h2>
+            Verification Code
+        </h2>
+
+
+        <p>
+            Give this OTP to
+            <strong id="modalUserName"></strong>.
+        </p>
+
+
+        <div
+            id="modalOtpCode"
+            class="generated-otp"
+        >
+            0000
+        </div>
+
+
+        <div class="modal-email">
+
+            <i class="fa-regular fa-envelope"></i>
+
+            <span id="modalUserEmail"></span>
+
+        </div>
+
+
+        <p class="otp-warning">
+
+            <i class="fa-solid fa-triangle-exclamation"></i>
+
+            This OTP is intended only for this user.
+
+        </p>
+
+
+        <button
+            type="button"
+            class="admin-button full-width"
+            onclick="closeOtpModal()"
+        >
+            Done
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div
+    id="toast"
+    class="toast"
+>
+
+    <i class="fa-solid fa-circle-check"></i>
+
+    <span id="toastMessage"></span>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
